@@ -28,9 +28,6 @@ export const authentication = asyncHandler(async (req,res,next)=>{
             if(user.deleted){
                 return next(new Error("User Deleted"))
             }
-            if(parseInt(user.passwordChangedAt.getTime()/1000) > decoded.iat){
-                return next(new Error("toeken is expired, please login again"))
-            }
             req.user = user
             next()
         })
