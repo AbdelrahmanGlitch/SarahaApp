@@ -7,6 +7,7 @@ export const validation = (schema)=>{
             validationResults.push(validationError.error.details);
             }
         }
+        console.log("validationResults", validationResults);
         if(validationResults.length > 0) {
             return next(new Error({msg: "Validation Error", errors: validationResults}))
         }
