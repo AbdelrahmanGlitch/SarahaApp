@@ -7,5 +7,5 @@ export const asyncHandler = (fn)=> {
 }
 
 export const globalErrorHandling = (err,req,res,next)=> {
-    return res.status(err['cause']|| 500).json({message: err.message})
+    return res.status(err['cause']|| 500).json({message: err})
 }
