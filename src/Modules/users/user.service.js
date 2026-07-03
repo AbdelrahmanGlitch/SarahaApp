@@ -24,12 +24,11 @@ export const signUp = asyncHandler(async (req,res,next) => {
         const hash = await Hash({password, SALT_ROUND: +process.env.SALT_ROUND})
         const phonecrypt = await Encrypt({phone, SECRET_KEY: process.env.SECRET_KEY})
         eventEmiter.emit("sendEmail",{email})
-        
+        console.log("Email sent to user for confirmation")
         const user = await userModel.create({name, email, password: hash, phone: phonecrypt, gender})
         return res.status(201).json({msg: "user Created successfully", user})
 })
 export const confirmEmail = asyncHandler( async (req,res,next) => {
-    try {
         const {token} = req.params
         if(!token){
             return next(new Error("Token Not Found!"))
@@ -48,9 +47,6 @@ export const confirmEmail = asyncHandler( async (req,res,next) => {
         user.confirmed = true
         await user.save() // to save changes after getting the user data
         return res.status(200).json({msg: "Email confirmed successfully"})
-    } catch(error) {
-        return next(new Error({mas : "Error confirming email", message : error.message}))
-    }
 })
 export const signIn = asyncHandler( async (req,res,next) => {
         const {email , password} = req.body
