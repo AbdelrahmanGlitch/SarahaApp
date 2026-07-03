@@ -5,7 +5,7 @@ import booystrap from './src/app.controller.js';
 const app = express()
 const port = process.env.PORT || 3000 ;
 console.log(process.env.EMAIL);
-console.log(process.env.FRONTEND_URL);
+console.log(process.env.PASSWORD);
 console.log("process.env.PORT =", process.env.PORT);
 
 booystrap(app, express);
