@@ -5,7 +5,7 @@ export const asyncHandler = (fn)=> {
         })
     }
 }
-
+ 
 export const globalErrorHandling = (err,req,res,next)=> {
     console.log("===== ERROR =====");
     console.dir(err, { depth: null });

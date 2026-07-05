@@ -9,7 +9,7 @@ export const validation = (schema)=>{
         }
         console.log("validationResults", validationResults);
         if(validationResults.length > 0) {
-            return next(new Error({msg: "Validation Error", errors: validationResults}))
+            return next(new Error({msg: "Validation Error", errors: validationResults.message}))
         }
         next()
     }
