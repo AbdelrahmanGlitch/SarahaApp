@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const connectionDB = async () =>{
-    console.log("URI_ONLINE =", process.env.URI_CONNECTION);
+    console.log("URI_ONLINE =", process.env.URI_ONLINE);
     await mongoose.connect(process.env.URI_ONLINE, {
         family: 4
     })
