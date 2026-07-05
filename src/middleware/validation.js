@@ -1,15 +1,17 @@
 export const validation = (schema)=>{
     return (req,res,next)=>{
-        let validationResults = [];
+        const validationResults = [];
         for(const key of Object.keys(schema)){
             const validationError = schema[key].validate(req[key], {abortEarly: false})
             if(validationError.error) {
-            validationResults.push(validationError.error.details);
+                validationResults.push(...validationError.error.details);
             }
         }
-        console.log("validationResults", validationResults);
         if(validationResults.length > 0) {
-            return next(new Error({msg: "Validation Error", errors: validationResults.message}))
+            const error = new Error("Validation Error")
+            error.errors = validationResults
+            error.cause = 400
+            return next(error)
         }
         next()
     }
